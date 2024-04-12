@@ -1,0 +1,23 @@
+{
+  "name": "shopit",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Shoping app - copyf of amazon, implemented using MERN stack",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./backend/app.js",
+    "dev":"SET NODE_ENV=DEVELOPMENT& nodemon backend/app.js",
+    "prod":"SET NODE_ENV=PRODUCTION& nodemon backend/app.js"
+
+  },
+  "author": "Mukul",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
