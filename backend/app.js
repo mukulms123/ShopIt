@@ -4,6 +4,7 @@ import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/error.js";
 //Import all routes
 import productRoutes from "./routes/products.js";
+import authRoutes from "./routes/auth.js";
 
 // Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -22,6 +23,7 @@ connectDatabase();
 app.use(express.json());
 
 app.use("/api/v1", productRoutes);
+app.use("/api/v1", authRoutes);
 
 //using error middlewares
 app.use(errorMiddleware);
