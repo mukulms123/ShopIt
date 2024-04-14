@@ -16,10 +16,11 @@ class APIFilters {
     this.query = this.query.find({ ...keyword });
     return this;
   }
+
   filters() {
     const queryCopy = { ...this.queryStr };
     //Fields to remove
-    const fieldsToRemmove = ["keyword"];
+    const fieldsToRemmove = ["keyword", "page"];
     fieldsToRemmove.forEach((el) => {
       delete queryCopy[el];
     });
@@ -29,6 +30,14 @@ class APIFilters {
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match) => `$${match}`);
 
     this.query = this.query.find(JSON.parse(queryStr));
+    return this;
+  }
+
+  pagination(resPerPage) {
+    const currentPage = Number(this.queryStr.page) || 1;
+    const skip = resPerPage * (currentPage - 1);
+
+    this.query = this.query.limit(resPerPage).skip(skip);
     return this;
   }
 }
