@@ -1,7 +1,9 @@
 import express from "express";
-import { isAuthenticatedUser } from "../middlewares/auth.js";
+import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
 import {
   forgotPassword,
+  getAllUsers,
+  getUserDetails,
   getUserProfile,
   loginUser,
   logoutUser,
@@ -22,5 +24,11 @@ router.route("/password/reset/:token").put(resetPassowd);
 router.route("/me").get(isAuthenticatedUser, getUserProfile);
 router.route("/password/update").put(isAuthenticatedUser, updatePassword);
 router.route("/me/update").put(isAuthenticatedUser, updateProfile);
+router
+  .route("/admin/users")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getAllUsers);
+router
+  .route("/admin/user/:id")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails);
 
 export default router;
