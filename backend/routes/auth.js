@@ -8,6 +8,7 @@ import {
   registerUser,
   resetPassowd,
   updatePassword,
+  updateProfile,
 } from "../controllers/authControllers.js";
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.route("/password/reset/:token").put(resetPassowd);
 
 router.route("/me").get(isAuthenticatedUser, getUserProfile);
 router.route("/password/update").put(isAuthenticatedUser, updatePassword);
+router.route("/me/update").put(isAuthenticatedUser, updateProfile);
 
 export default router;
