@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 //Import all routes
 import productRoutes from "./routes/products.js";
 import authRoutes from "./routes/auth.js";
+import orderRoutes from "./routes/order.js";
 
 // Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -26,6 +27,7 @@ app.use(cookieParser());
 
 app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
+app.use("/api/v1", orderRoutes);
 
 //using error middlewares
 app.use(errorMiddleware);
