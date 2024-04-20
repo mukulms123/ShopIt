@@ -47,7 +47,7 @@ export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Update a product by id => PUT api/v1/products/:id
-export const updateProductById = catchAsyncErrors(async (req, res) => {
+export const updateProductById = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
@@ -62,7 +62,7 @@ export const updateProductById = catchAsyncErrors(async (req, res) => {
 });
 
 // Delete a product by id => DELETE api/v1/products/:id
-export const deleteProductById = catchAsyncErrors(async (req, res) => {
+export const deleteProductById = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.findByIdAndDelete(req.params.id);
 
   if (!products) {
@@ -75,7 +75,7 @@ export const deleteProductById = catchAsyncErrors(async (req, res) => {
 });
 
 // Create/Update product review => /api/v1/reviews
-export const createProductReview = catchAsyncErrors(async (req, res) => {
+export const createProductReview = catchAsyncErrors(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
 
   const review = {
@@ -113,5 +113,18 @@ export const createProductReview = catchAsyncErrors(async (req, res) => {
 
   res.status(200).json({
     success: true,
+  });
+});
+
+// Get product review => /api/v1/reviews?id
+export const getProductReview = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.query.id);
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found!", 404));
+  }
+
+  res.status(200).json({
+    reviews: product.reviews,
   });
 });

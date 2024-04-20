@@ -3,6 +3,7 @@ import {
   createProductReview,
   deleteProductById,
   getProductDetails,
+  getProductReview,
   getProducts,
   newProducts,
   updateProductById,
@@ -23,6 +24,9 @@ router
   .route("/admin/products/:id")
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProductById);
 
-router.route("/reviews").post(isAuthenticatedUser, createProductReview);
+router
+  .route("/reviews")
+  .post(isAuthenticatedUser, createProductReview)
+  .get(isAuthenticatedUser, getProductReview);
 
 export default router;
