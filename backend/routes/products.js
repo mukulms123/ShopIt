@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  createProductReview,
   deleteProductById,
   getProductDetails,
   getProducts,
@@ -21,5 +22,7 @@ router
 router
   .route("/admin/products/:id")
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProductById);
+
+router.route("/reviews").post(isAuthenticatedUser, createProductReview);
 
 export default router;
