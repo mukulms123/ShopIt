@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
 import {
+  deleteOrders,
   getAllOrders,
   getMyOrders,
   getOrderDetails,
@@ -15,8 +16,10 @@ router.route("/me/orders").get(isAuthenticatedUser, getMyOrders);
 router
   .route("/admin/orders")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getAllOrders);
+
 router
   .route("/admin/orders/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder);
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder)
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteOrders);
 
 export default router;
