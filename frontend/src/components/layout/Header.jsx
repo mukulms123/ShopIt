@@ -10,7 +10,7 @@ const Header = () => {
           </a>
         </div>
       </div>
-      <div className="col-12 col-md-6 mt-2 mt-md-0">
+      <div className="col-12 col-md-5 mt-2 mt-md-0">
         <form action="your_search_action_url_here" method="get">
           <div className="input-group">
             <input
@@ -28,7 +28,7 @@ const Header = () => {
           </div>
         </form>
       </div>
-      <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
+      <div className="col-12 col-md-4 mt-4 mt-md-0 text-center">
         <a href="/cart" style={{ textDecoration: "none" }}>
           <span id="cart" className="ms-3">
             {" "}
