@@ -2,10 +2,12 @@ import React from "react";
 import MetaData from "./layout/MetaData";
 import { useGetProductsQuery } from "../redux/api/productsApi";
 import ProductItem from "./product/ProductItem";
+import Loader from "./layout/Loader";
 
 const Home = () => {
   const { data, isLoading } = useGetProductsQuery();
-  console.log(data, isLoading);
+
+  if (isLoading) return <Loader />;
   return (
     <>
       <MetaData title={"Buy Best Products Online"} />
