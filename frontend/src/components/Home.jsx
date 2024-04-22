@@ -10,7 +10,8 @@ import { useSearchParams } from "react-router-dom";
 const Home = () => {
   let [searchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
-  const params = { page };
+  const keyword = searchParams.get("keyword") || "";
+  const params = { page, keyword };
   const { data, isLoading, error, isError } = useGetProductsQuery(params);
 
   useEffect(() => {
@@ -20,20 +21,31 @@ const Home = () => {
   }, [isError]);
   console.log(data);
 
+  const columnsize = keyword ? "4" : "3";
+
   if (isLoading) return <Loader />;
   return (
     <>
       <MetaData title={"Buy Best Products Online"} />
       <div className="row">
-        <div className="col-12 col-sm-6 col-md-12">
+        {keyword && (
+          <div className="col-6 col-md-3 mt-5">
+            <p>Filters</p>
+          </div>
+        )}
+        <div className={keyword ? "col-6 col-md-9" : "col-sm-6 col-md-12"}>
           <h1 id="products_heading" className="text-secondary">
-            Latest Products
+            {keyword
+              ? `${data.products.length} Products Found with Keyword ${keyword}`
+              : "Latest Products"}
           </h1>
 
           <section id="products" className="mt-5">
             <div className="row">
               {data?.products?.map((product) => {
-                return <ProductItem product={product} />;
+                return (
+                  <ProductItem product={product} columnsize={columnsize} />
+                );
               })}
             </div>
           </section>
