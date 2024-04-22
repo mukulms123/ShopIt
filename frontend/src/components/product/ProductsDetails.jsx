@@ -47,7 +47,7 @@ const ProductsDetails = () => {
           {product.images.map((img) => {
             return (
               <div className="col-2 ms-4 mt-2">
-                <a role="button">
+                <a href="#" role="button">
                   <img
                     className={`d-block border rounded p-3 cursor-pointer ${
                       img.url === activeImg ? "border-warning" : ""
